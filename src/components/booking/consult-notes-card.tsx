@@ -2,10 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { Download, RotateCcw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/context/cart";
-import { getProductById } from "@/data/products";
 import type { ConsultNote, Vet } from "@/data/types";
-import { formatDateID, formatIDR } from "@/lib/format";
+import { formatDateID } from "@/lib/format";
 
 interface ConsultNotesCardProps {
 	notes: ConsultNote;
@@ -13,11 +11,6 @@ interface ConsultNotesCardProps {
 }
 
 export function ConsultNotesCard({ notes, vet }: ConsultNotesCardProps) {
-	const { addItem } = useCart();
-	const recommendedProducts = notes.prescribedProductIds
-		.map((id) => getProductById(id))
-		.filter(Boolean);
-
 	function handlePrint() {
 		window.print();
 	}
@@ -71,49 +64,6 @@ export function ConsultNotesCard({ notes, vet }: ConsultNotesCardProps) {
 					)}
 				</div>
 			</div>
-
-			{recommendedProducts.length > 0 && (
-				<div className="rounded-xl border border-border bg-card overflow-hidden">
-					<div className="px-4 py-3 border-b border-border bg-muted/30">
-						<p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-							Produk yang Direkomendasikan
-						</p>
-					</div>
-					<div className="divide-y divide-border">
-						{recommendedProducts.map((product) => {
-							if (!product) return null;
-							return (
-								<div
-									key={product.id}
-									className="flex items-center gap-3 px-4 py-3.5"
-								>
-									<img
-										src={product.images[0]}
-										alt={product.name}
-										className="size-14 rounded-lg object-cover shrink-0"
-									/>
-									<div className="flex-1 min-w-0">
-										<p className="text-sm font-medium text-foreground truncate">
-											{product.name}
-										</p>
-										<p className="text-sm text-primary font-semibold">
-											{formatIDR(product.price)}
-										</p>
-									</div>
-									<Button
-										size="sm"
-										variant="outline"
-										onClick={() => addItem(product.id)}
-										className="shrink-0 min-h-9"
-									>
-										Tambah
-									</Button>
-								</div>
-							);
-						})}
-					</div>
-				</div>
-			)}
 
 			<div className="flex gap-3">
 				<Button

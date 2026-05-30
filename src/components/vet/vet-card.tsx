@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Languages } from "lucide-react";
-import { RatingStars } from "@/components/product/rating-stars";
+import { RatingStars } from "@/components/common/rating-stars";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SpecialtyBadge } from "@/components/vet/specialty-badge";

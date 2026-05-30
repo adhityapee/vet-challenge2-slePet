@@ -63,7 +63,6 @@ function buildMockNote(): ConsultNote {
 			"Kemungkinan iritasi ringan atau reaksi alergi yang bersifat sementara. Tidak ditemukan tanda-tanda penyakit serius pada sesi konsultasi ini.",
 		recommendations:
 			"Berikan makanan sesuai porsi yang dianjurkan. Pastikan akses air bersih tersedia setiap saat. Hindari paparan pemicu alergi yang teridentifikasi. Lakukan kontrol kembali jika gejala memburuk atau tidak membaik dalam 3 hari.",
-		prescribedProductIds: ["p-001", "p-015"],
 		followUpInDays: 7,
 		issuedAt: new Date().toISOString(),
 	};

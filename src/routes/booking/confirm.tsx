@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Calendar, ChevronRight, User } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { PaymentMethodSelect } from "@/components/checkout/payment-method-select";
+import { PaymentMethodSelect } from "@/components/booking/payment-method-select";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useBooking } from "@/context/booking";

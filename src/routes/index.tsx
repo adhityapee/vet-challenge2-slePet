@@ -1,31 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Stethoscope } from "lucide-react";
-import { useEffect, useState } from "react";
+
 import { PageSection } from "@/components/common/page-section";
 import { ArticleCard } from "@/components/home/article-card";
-import { CategoryGrid } from "@/components/home/category-grid";
 import { Hero } from "@/components/home/hero";
 import { TrustBand } from "@/components/home/trust-band";
-import { ProductCard } from "@/components/product/product-card";
-import { UpcomingDeliveryWidget } from "@/components/subscriptions/upcoming-delivery-widget";
-import { useCatalog } from "@/context/catalog";
-import { usePetProfiles } from "@/context/pet-profile";
+import { articles } from "@/data/articles";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
-	const { recommendFor, articles } = useCatalog();
-	const { activeProfile } = usePetProfiles();
-
-	// Personalization reads localStorage-backed state that hydrates client-side.
-	// Gate on mounted so the first server/client paint matches (non-personalized).
-	const [mounted, setMounted] = useState(false);
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	const personalized = mounted && activeProfile ? activeProfile : null;
-	const recommendations = recommendFor(personalized, 8);
 	const featuredArticles = articles.slice(0, 3);
 
 	return (
@@ -33,47 +17,6 @@ function Home() {
 			<Hero />
 
 			<TrustBand />
-
-			{/* Upcoming delivery (FR-36). Renders nothing without an active subscription. */}
-			<UpcomingDeliveryWidget />
-
-			{/* Personalized recommendations / vet picks (Journey 2 + personalization) */}
-			<PageSection
-				eyebrow={personalized ? "Saatnya isi ulang?" : "Pilihan dokter hewan"}
-				title={
-					personalized
-						? `Rekomendasi untuk ${personalized.name}`
-						: "Disetujui dokter hewan, dipercaya pemilik"
-				}
-				description={
-					personalized
-						? "Kami pilih berdasarkan jenis dan usia hewan kesayangan Anda."
-						: "Produk yang paling sering direkomendasikan dokter hewan kami. Buat profil hewan untuk rekomendasi yang lebih sesuai."
-				}
-				action={
-					<Link
-						to="/products"
-						className="inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-primary hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
-					>
-						Lihat semua
-						<ArrowRight className="size-4" aria-hidden="true" />
-					</Link>
-				}
-				contentClassName="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
-			>
-				{recommendations.map((product) => (
-					<ProductCard key={product.id} product={product} />
-				))}
-			</PageSection>
-
-			{/* Category grid */}
-			<PageSection
-				eyebrow="Belanja per kategori"
-				title="Semua kebutuhan, satu tempat"
-				description="Dari makanan harian sampai perawatan kesehatan, semuanya dipilih dengan cermat."
-			>
-				<CategoryGrid />
-			</PageSection>
 
 			{/* Telehealth CTA (primary) */}
 			<section className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-secondary/30 to-background p-6 md:p-8">
@@ -136,7 +79,7 @@ function Home() {
 				</div>
 			</section>
 
-			{/* Vet content / tips */}
+			{/* Articles */}
 			<PageSection
 				eyebrow="Saran dokter hewan"
 				title="Artikel yang ditulis dokter hewan"
@@ -157,7 +100,7 @@ function Home() {
 				))}
 			</PageSection>
 
-			{/* Why PetSehat social proof band */}
+			{/* Social proof band */}
 			<section className="rounded-2xl border border-border bg-card p-6 text-center md:p-10">
 				<span className="mx-auto flex size-12 items-center justify-center rounded-full bg-secondary text-primary">
 					<Sparkles className="size-6" aria-hidden="true" />
@@ -166,14 +109,14 @@ function Home() {
 					Tempat ribuan pemilik merawat hewan kesayangannya
 				</h2>
 				<p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-					Saran yang jujur, produk yang teruji, dan pengiriman yang bisa
-					diandalkan. Kami ada untuk membantu Anda memberi yang terbaik.
+					Dokter hewan berlisensi, saran berbasis ilmu pengetahuan, dan
+					konsultasi kapan pun kamu butuhkan.
 				</p>
 				<div className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-					<Stat value="60+" label="Produk pilihan" />
-					<Stat value="Gratis" label="Saran dokter hewan" />
-					<Stat value="4,7★" label="Rata-rata penilaian" />
-					<Stat value="3 hari" label="Estimasi pengiriman" />
+					<Stat value="8" label="Dokter spesialis" />
+					<Stat value="Gratis" label="Pemeriksa gejala" />
+					<Stat value="4,8★" label="Rata-rata penilaian" />
+					<Stat value="Rp 90rb" label="Mulai dari per sesi" />
 				</div>
 			</section>
 		</div>

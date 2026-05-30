@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 
 import { AvailabilityPicker } from "@/components/booking/availability-picker";
 import { EmptyState } from "@/components/common/empty-state";
-import { RatingStars } from "@/components/product/rating-stars";
+import { RatingStars } from "@/components/common/rating-stars";
 import {
 	Breadcrumb,
 	BreadcrumbItem,

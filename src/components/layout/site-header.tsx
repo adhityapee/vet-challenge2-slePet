@@ -1,6 +1,7 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
 	Bird,
+	CalendarDays,
 	Cat,
 	Dog,
 	Fish,
@@ -10,8 +11,6 @@ import {
 	PawPrint,
 	Plus,
 	Rabbit,
-	Search,
-	ShoppingCart,
 	User as UserIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -26,7 +25,6 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
 	Sheet,
 	SheetClose,
@@ -36,7 +34,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { useAuth } from "@/context/auth";
-import { useCart } from "@/context/cart";
+import { useConsultations } from "@/context/consultations";
 import { usePetProfiles } from "@/context/pet-profile";
 import type { PetSpecies } from "@/data/types";
 import { cn } from "@/lib/utils";
@@ -53,7 +51,6 @@ const SPECIES_ICON: Record<PetSpecies, LucideIcon> = {
 const NAV_LINKS = [
 	{ to: "/", label: "Beranda" },
 	{ to: "/vets", label: "Cari Dokter" },
-	{ to: "/products", label: "Produk" },
 	{ to: "/advice", label: "Saran Dokter" },
 ] as const;
 
@@ -68,43 +65,6 @@ function Wordmark() {
 				PetSehat
 			</span>
 		</Link>
-	);
-}
-
-function SearchBox({
-	className,
-	onSubmitted,
-}: {
-	className?: string;
-	onSubmitted?: () => void;
-}) {
-	const navigate = useNavigate();
-	const [query, setQuery] = useState("");
-
-	const submit = (e: React.FormEvent) => {
-		e.preventDefault();
-		const q = query.trim();
-		navigate({ to: "/products", search: q ? { q } : {} });
-		onSubmitted?.();
-	};
-
-	return (
-		<search className={cn("block", className)}>
-			<form onSubmit={submit} className="relative">
-				<Search
-					className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-					aria-hidden="true"
-				/>
-				<Input
-					type="search"
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-					placeholder="Cari produk..."
-					aria-label="Cari produk"
-					className="h-10 pl-9"
-				/>
-			</form>
-		</search>
 	);
 }
 
@@ -140,7 +100,7 @@ function PetProfileChip() {
 				<div className="flex flex-col gap-2 px-4">
 					{profiles.length === 0 ? (
 						<p className="text-sm text-muted-foreground">
-							Belum ada profil hewan. Tambahkan agar rekomendasi lebih sesuai.
+							Belum ada profil hewan. Tambahkan agar konsultasi lebih personal.
 						</p>
 					) : (
 						profiles.map((profile) => {
@@ -246,12 +206,6 @@ function AccountAffordance() {
 				<DropdownMenuItem render={<Link to="/account/consultations" />}>
 					Konsultasi saya
 				</DropdownMenuItem>
-				<DropdownMenuItem render={<Link to="/account/orders" />}>
-					Pesanan
-				</DropdownMenuItem>
-				<DropdownMenuItem render={<Link to="/account/subscriptions" />}>
-					Langganan
-				</DropdownMenuItem>
 				<DropdownMenuItem render={<Link to="/account/pets" />}>
 					Profil hewan
 				</DropdownMenuItem>
@@ -265,20 +219,20 @@ function AccountAffordance() {
 	);
 }
 
-function CartButton() {
-	const { count } = useCart();
+function ConsultButton() {
+	const { upcoming } = useConsultations();
 	return (
 		<Button
 			variant="ghost"
 			size="icon-lg"
 			className="relative"
-			aria-label={`Keranjang, ${count} item`}
-			render={<Link to="/cart" />}
+			aria-label={`Jadwal konsultasi, ${upcoming.length} jadwal aktif`}
+			render={<Link to="/account/consultations" />}
 		>
-			<ShoppingCart className="size-5" />
-			{count > 0 ? (
+			<CalendarDays className="size-5" />
+			{upcoming.length > 0 ? (
 				<span className="absolute -right-0.5 -top-0.5 flex min-w-5 items-center justify-center rounded-full bg-primary px-1 text-[0.65rem] font-bold text-primary-foreground">
-					{count > 99 ? "99+" : count}
+					{upcoming.length > 9 ? "9+" : upcoming.length}
 				</span>
 			) : null}
 		</Button>
@@ -347,20 +301,13 @@ export function SiteHeader() {
 					))}
 				</nav>
 
-				<SearchBox className="ml-auto hidden max-w-xs flex-1 lg:block" />
-
-				<div className="ml-auto flex items-center gap-1.5 lg:ml-3">
+				<div className="ml-auto flex items-center gap-1.5">
 					<div className="hidden sm:block">
 						<PetProfileChip />
 					</div>
-					<CartButton />
+					<ConsultButton />
 					<AccountAffordance />
 				</div>
-			</div>
-
-			{/* Mobile search row */}
-			<div className="border-t border-border px-4 py-2 lg:hidden">
-				<SearchBox />
 			</div>
 		</header>
 	);

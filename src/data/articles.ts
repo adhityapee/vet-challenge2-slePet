@@ -1,4 +1,4 @@
-import type { Article } from "@/data/types";
+﻿import type { Article } from "@/data/types";
 
 export const articles: Article[] = [
 	{
@@ -24,7 +24,6 @@ Pilih pakan khusus anak anjing yang mengandung protein berkualitas serta DHA unt
 Beri makan dalam porsi kecil tetapi sering. Untuk usia di bawah empat bulan, tiga sampai empat kali sehari adalah ritme yang nyaman bagi pencernaannya. Setelah itu Anda bisa menguranginya secara bertahap menjadi dua kali sehari.
 
 Air bersih harus selalu tersedia. Perhatikan juga berat badan secara berkala. Jika ragu soal porsi yang tepat, konsultasikan dengan dokter hewan langganan Anda.`,
-		relatedProductIds: ["p-002", "p-023", "p-031"],
 	},
 	{
 		id: "a-002",
@@ -49,7 +48,6 @@ Taurin adalah nutrisi penting yang hanya bisa diperoleh kucing dari makanan. Kek
 Kombinasikan makanan kering dan makanan basah untuk menjaga asupan cairan. Banyak kucing kurang minum, sehingga makanan basah membantu menjaga kesehatan ginjal dan saluran kemih.
 
 Perhatikan respons kucing setelah beberapa minggu. Bulu yang berkilau, energi yang stabil, dan pencernaan yang lancar adalah tanda pakan tersebut cocok untuknya.`,
-		relatedProductIds: ["p-004", "p-006", "p-010"],
 	},
 	{
 		id: "a-003",
@@ -74,7 +72,6 @@ Selain vaksin, pemberian obat cacing secara rutin penting dilakukan. Anak hewan 
 Pencegahan kutu dan caplak juga tidak boleh diabaikan. Parasit ini bukan hanya membuat hewan tidak nyaman, tetapi juga bisa menularkan penyakit.
 
 Catat tanggal setiap tindakan pencegahan. Dengan jadwal yang teratur, Anda bisa menghindari banyak masalah kesehatan sebelum sempat muncul.`,
-		relatedProductIds: ["p-036", "p-039", "p-031"],
 	},
 	{
 		id: "a-004",
@@ -99,7 +96,6 @@ Salah satu cara sederhana mengeceknya adalah dengan menarik lembut kulit di teng
 Perhatikan juga gusi yang kering atau lengket, mata yang tampak cekung, serta kelesuan yang tidak biasa. Nafsu makan yang menurun sering menyertai kondisi ini.
 
 Sediakan air bersih yang mudah dijangkau, dan pertimbangkan air mancur minum untuk mendorong hewan minum lebih banyak. Jika tanda dehidrasi tampak jelas, segera bawa ke dokter hewan.`,
-		relatedProductIds: ["p-056", "p-031"],
 	},
 	{
 		id: "a-005",
@@ -124,7 +120,6 @@ Beralihlah ke pakan senior yang lebih rendah kalori namun tetap kaya nutrisi. Ta
 Tetap ajak bergerak, tetapi sesuaikan intensitasnya. Jalan santai yang teratur lebih baik daripada aktivitas berat yang membebani sendi.
 
 Pemeriksaan kesehatan rutin menjadi semakin penting di usia ini. Banyak kondisi pada anjing tua bisa ditangani dengan baik bila terdeteksi sejak dini.`,
-		relatedProductIds: ["p-003", "p-033", "p-046"],
 	},
 	{
 		id: "a-006",
@@ -149,7 +144,6 @@ Sediakan rumput kering tanpa batas, pelet berserat tinggi dalam porsi terukur, d
 Kelinci juga butuh ruang untuk bergerak dan tempat persembunyian agar merasa aman. Kandang yang terlalu sempit bisa membuatnya stres.
 
 Perhatikan kebiasaan makan dan buang air setiap hari. Perubahan mendadak pada keduanya sering menjadi tanda awal masalah kesehatan pada kelinci.`,
-		relatedProductIds: ["p-016", "p-017", "p-048"],
 	},
 	{
 		id: "a-007",
@@ -174,7 +168,6 @@ Penyebab paling umum adalah nutrisi yang kurang seimbang. Asupan omega 3 dan 6 y
 Menyisir secara rutin sangat membantu mengurangi bulu yang beterbangan di rumah dan merangsang sirkulasi kulit. Pilih sisir yang sesuai dengan jenis bulu hewan Anda.
 
 Jika rontok disertai luka, ketombe, atau bau yang tidak biasa, sebaiknya periksakan ke dokter hewan karena bisa jadi ada masalah kulit yang mendasarinya.`,
-		relatedProductIds: ["p-032", "p-044", "p-052"],
 	},
 	{
 		id: "a-008",
@@ -199,7 +192,6 @@ Menyikat gigi adalah cara paling efektif. Gunakan pasta gigi khusus hewan karena
 Camilan dental dan cairan tambahan air minum bisa menjadi pelengkap, meski tidak menggantikan menyikat gigi secara langsung.
 
 Perhatikan tanda seperti napas yang sangat bau, gusi merah, atau enggan mengunyah. Tanda-tanda ini menunjukkan perlunya pemeriksaan ke dokter hewan.`,
-		relatedProductIds: ["p-041", "p-042", "p-014"],
 	},
 	{
 		id: "a-009",
@@ -224,10 +216,10 @@ Sebaliknya, telinga yang menempel ke belakang dan tubuh yang merendah menunjukka
 Bermain setiap hari sangat penting bagi kucing. Selain menyalurkan energi, permainan berburu tiruan membantu menjaga kesehatan mental dan mengurangi perilaku merusak.
 
 Sediakan tempat tinggi dan area persembunyian. Kucing merasa aman ketika bisa mengamati lingkungannya dari posisi yang nyaman.`,
-		relatedProductIds: ["p-049", "p-046", "p-013"],
 	},
 ];
 
 export function getArticleBySlug(slug: string): Article | undefined {
 	return articles.find((a) => a.slug === slug);
 }
+

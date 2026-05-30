@@ -40,10 +40,10 @@ export function Hero() {
 							Cari Dokter
 						</Link>
 						<Link
-							to="/products"
+							to="/advice"
 							className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-background px-6 text-base font-semibold text-foreground ring-1 ring-border transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
 						>
-							Lihat Produk
+							Saran Dokter
 							<ArrowRight className="size-4" aria-hidden="true" />
 						</Link>
 					</div>
