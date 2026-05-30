@@ -1,12 +1,10 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { ArrowLeft, FileQuestion, ShieldCheck } from "lucide-react";
-import { useMemo } from "react";
 
 import { VetByline } from "@/components/advice/vet-byline";
 import { EmptyState } from "@/components/common/empty-state";
-import { ProductCard } from "@/components/product/product-card";
 import { Button } from "@/components/ui/button";
-import { useCatalog } from "@/context/catalog";
+import { guides } from "@/data/guides";
 
 export const Route = createFileRoute("/advice/guide/$slug")({
 	component: GuideDetail,
@@ -14,15 +12,7 @@ export const Route = createFileRoute("/advice/guide/$slug")({
 
 function GuideDetail() {
 	const { slug } = useParams({ from: "/advice/guide/$slug" });
-	const { getGuide, getProduct } = useCatalog();
-	const guide = getGuide(slug);
-
-	const products = useMemo(() => {
-		if (!guide) return [];
-		return guide.productIds
-			.map((id) => getProduct(id))
-			.filter((p): p is NonNullable<typeof p> => Boolean(p));
-	}, [guide, getProduct]);
+	const guide = guides.find((g) => g.slug === slug);
 
 	if (!guide) {
 		return (
@@ -71,72 +61,16 @@ function GuideDetail() {
 				</div>
 			</header>
 
-			<section className="mt-8">
-				<div className="mb-5 flex items-baseline justify-between gap-3">
-					<h2 className="font-display text-xl font-semibold text-foreground">
-						Produk pilihan dokter
-					</h2>
-					<span className="text-sm text-muted-foreground">
-						{products.length} produk
-					</span>
-				</div>
-
-				{products.length === 0 ? (
-					<EmptyState
-						title="Produk belum tersedia"
-						description="Daftar produk untuk panduan ini sedang kami siapkan."
-					/>
-				) : (
-					<ol className="space-y-4">
-						{products.map((product, index) => (
-							<li
-								key={product.id}
-								className="grid items-stretch gap-4 rounded-2xl border border-border bg-card p-4 sm:grid-cols-[1fr_auto]"
-							>
-								<div className="flex flex-col gap-2">
-									<span className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary">
-										<span className="flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs">
-											{index + 1}
-										</span>
-										Pilihan ke-{index + 1}
-									</span>
-									<h3 className="font-display text-lg font-semibold leading-snug text-foreground">
-										{product.name}
-									</h3>
-									{product.vetNote ? (
-										<div className="rounded-xl bg-secondary/50 p-3">
-											<p className="text-sm leading-relaxed text-foreground">
-												&ldquo;{product.vetNote.text}&rdquo;
-											</p>
-											<p className="mt-2 text-xs font-medium text-muted-foreground">
-												{product.vetNote.vetName}, {product.vetNote.credential}
-											</p>
-										</div>
-									) : (
-										<p className="text-sm leading-relaxed text-muted-foreground">
-											{product.description}
-										</p>
-									)}
-								</div>
-								<div className="w-full sm:w-56">
-									<ProductCard product={product} className="h-full" />
-								</div>
-							</li>
-						))}
-					</ol>
-				)}
-			</section>
-
 			<aside className="mt-10 rounded-2xl bg-secondary/50 p-6 text-center">
 				<h2 className="font-display text-lg font-semibold text-foreground">
-					Belum yakin mana yang pas?
+					Ingin bertanya langsung ke dokter?
 				</h2>
 				<p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-					Kirim pertanyaanmu ke tim dokter hewan kami dan kami bantu memilih
-					yang paling sesuai untuk hewanmu.
+					Konsultasikan kondisi hewanmu secara langsung melalui video call
+					bersama dokter hewan berlisensi.
 				</p>
-				<Button className="mt-4" render={<Link to="/advice/ask" />}>
-					Tanya Dokter
+				<Button className="mt-4" render={<Link to="/vets" />}>
+					Cari Dokter
 				</Button>
 			</aside>
 		</div>

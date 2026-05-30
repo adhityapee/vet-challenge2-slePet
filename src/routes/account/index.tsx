@@ -1,12 +1,11 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
+	CalendarDays,
 	ChevronRight,
 	LogOut,
 	type LucideIcon,
-	Package,
 	PawPrint,
 	Plus,
-	RefreshCw,
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -235,22 +234,16 @@ function AccountInner() {
 
 				<div className="flex flex-col gap-3">
 					<QuickLink
+						to="/account/consultations"
+						icon={CalendarDays}
+						title="Konsultasi saya"
+						description="Lihat jadwal dan riwayat konsultasi"
+					/>
+					<QuickLink
 						to="/account/pets"
 						icon={PawPrint}
 						title="Profil hewan"
 						description="Kelola hewan kesayanganmu"
-					/>
-					<QuickLink
-						to="/account/orders"
-						icon={Package}
-						title="Pesanan saya"
-						description="Lihat riwayat dan lacak pesanan"
-					/>
-					<QuickLink
-						to="/account/subscriptions"
-						icon={RefreshCw}
-						title="Langganan"
-						description="Atur pengiriman rutin"
 					/>
 				</div>
 			</div>

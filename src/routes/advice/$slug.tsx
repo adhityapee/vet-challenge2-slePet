@@ -1,14 +1,13 @@
 import { createFileRoute, Link, useParams } from "@tanstack/react-router";
-import { ArrowLeft, Clock, FileQuestion, ShoppingBag } from "lucide-react";
+import { ArrowLeft, Clock, FileQuestion } from "lucide-react";
 import { useEffect, useMemo } from "react";
 
 import { petLabel, topicMeta } from "@/components/advice/topics";
 import { VetByline } from "@/components/advice/vet-byline";
 import { EmptyState } from "@/components/common/empty-state";
-import { ProductCard } from "@/components/product/product-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { useCatalog } from "@/context/catalog";
+import { articles } from "@/data/articles";
 import { track } from "@/lib/analytics";
 import { formatDateID } from "@/lib/format";
 
@@ -21,7 +20,6 @@ interface Block {
 	text: string;
 }
 
-/** Split the markdown-ish body into paragraphs on blank lines, detecting simple headings. */
 function parseBody(body: string): Block[] {
 	return body
 		.split(/\n\s*\n/)
@@ -36,8 +34,7 @@ function parseBody(body: string): Block[] {
 
 function ArticleDetail() {
 	const { slug } = useParams({ from: "/advice/$slug" });
-	const { getArticle, getProduct } = useCatalog();
-	const article = getArticle(slug);
+	const article = articles.find((a) => a.slug === slug);
 
 	useEffect(() => {
 		if (article) track("vet_content_viewed", { slug });
@@ -47,13 +44,6 @@ function ArticleDetail() {
 		() => (article ? parseBody(article.body) : []),
 		[article],
 	);
-
-	const relatedProducts = useMemo(() => {
-		if (!article) return [];
-		return article.relatedProductIds
-			.map((id) => getProduct(id))
-			.filter((p): p is NonNullable<typeof p> => Boolean(p));
-	}, [article, getProduct]);
 
 	if (!article) {
 		return (
@@ -155,36 +145,15 @@ function ArticleDetail() {
 				)}
 			</article>
 
-			{relatedProducts.length > 0 ? (
-				<section className="mt-12 border-t border-border pt-8">
-					<div className="mb-2 flex items-center gap-2">
-						<ShoppingBag className="size-4 text-primary" aria-hidden="true" />
-						<h2 className="font-display text-xl font-semibold text-foreground">
-							Produk yang direkomendasikan
-						</h2>
-					</div>
-					<p className="mb-5 text-sm text-muted-foreground">
-						Pilihan yang sejalan dengan saran di atas, supaya kamu bisa langsung
-						mempraktikkannya di rumah.
-					</p>
-					<div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-						{relatedProducts.map((product) => (
-							<ProductCard key={product.id} product={product} />
-						))}
-					</div>
-				</section>
-			) : null}
-
 			<aside className="mt-10 rounded-2xl bg-secondary/50 p-6 text-center">
 				<h2 className="font-display text-lg font-semibold text-foreground">
 					Masih ada yang ingin kamu tanyakan?
 				</h2>
 				<p className="mx-auto mt-1 max-w-md text-sm text-muted-foreground">
-					Tim dokter hewan kami siap membantu. Kirim pertanyaanmu dan dapatkan
-					jawaban dalam 2 hari kerja.
+					Konsultasikan langsung dengan dokter hewan kami secara video call.
 				</p>
-				<Button className="mt-4" render={<Link to="/advice/ask" />}>
-					Tanya Dokter
+				<Button className="mt-4" render={<Link to="/vets" />}>
+					Cari Dokter
 				</Button>
 			</aside>
 		</div>

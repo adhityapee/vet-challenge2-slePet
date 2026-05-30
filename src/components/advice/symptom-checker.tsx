@@ -5,14 +5,11 @@ import {
 	CircleCheck,
 	Info,
 	RotateCcw,
-	Stethoscope,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 import { petLabel } from "@/components/advice/topics";
-import { ProductCard } from "@/components/product/product-card";
 import { Button } from "@/components/ui/button";
-import { useCatalog } from "@/context/catalog";
 import { symptomSpecies, symptomTree } from "@/data/symptom-tree";
 import type { SymptomNode, SymptomOutcome } from "@/data/types";
 import { track } from "@/lib/analytics";
@@ -57,7 +54,6 @@ interface SymptomCheckerProps {
  * resolves to. Terminal nodes carry an outcome and render the result screen.
  */
 export function SymptomChecker({ initialSpecies }: SymptomCheckerProps) {
-	const { getProduct } = useCatalog();
 	const validInitial =
 		initialSpecies && symptomTree[initialSpecies] ? initialSpecies : null;
 	const [species, setSpecies] = useState<string | null>(validInitial);
@@ -145,9 +141,6 @@ export function SymptomChecker({ initialSpecies }: SymptomCheckerProps) {
 	if (currentOutcome) {
 		const meta = SEE_VET_META[currentOutcome.seeVet];
 		const ToneIcon = meta.icon;
-		const recommended = currentOutcome.productIds
-			.map((id) => getProduct(id))
-			.filter((p): p is NonNullable<typeof p> => Boolean(p));
 
 		return (
 			<div className="space-y-6">
@@ -175,31 +168,6 @@ export function SymptomChecker({ initialSpecies }: SymptomCheckerProps) {
 					</div>
 				</div>
 
-				{recommended.length > 0 ? (
-					<div className="space-y-3">
-						<div className="flex items-center gap-2">
-							<Stethoscope className="size-4 text-primary" aria-hidden="true" />
-							<h3 className="font-display text-lg font-semibold text-foreground">
-								Produk yang direkomendasikan dokter kami
-							</h3>
-						</div>
-						<p className="text-sm text-muted-foreground">
-							Pilihan ini sering kami sarankan untuk keluhan serupa. Selalu
-							ikuti aturan pakai pada kemasan.
-						</p>
-						<div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-							{recommended.map((product) => (
-								<ProductCard key={product.id} product={product} />
-							))}
-						</div>
-					</div>
-				) : (
-					<div className="rounded-xl border border-dashed border-border bg-muted/40 p-4 text-sm text-muted-foreground">
-						Untuk keluhan ini kami tidak menyarankan produk bebas. Pemeriksaan
-						dokter hewan adalah langkah terbaik.
-					</div>
-				)}
-
 				<div className="flex flex-wrap gap-3">
 					<Button type="button" variant="outline" onClick={stepBack}>
 						Kembali satu langkah
@@ -208,8 +176,8 @@ export function SymptomChecker({ initialSpecies }: SymptomCheckerProps) {
 						<RotateCcw className="size-4" />
 						Mulai ulang
 					</Button>
-					<Button type="button" render={<Link to="/advice/ask" />}>
-						Tanya dokter kami
+					<Button type="button" render={<Link to="/vets" />}>
+						Konsultasi dengan dokter
 					</Button>
 				</div>
 

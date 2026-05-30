@@ -33,12 +33,10 @@ export function safeRemove(key: string): void {
 }
 
 export const STORAGE_KEYS = {
-	cart: "petsehat_cart",
-	promo: "petsehat_promo",
 	profiles: "petsehat_profiles",
 	activeProfile: "petsehat_active_profile",
 	user: "petsehat_user",
 	session: "petsehat_session",
-	orders: "petsehat_orders",
-	subscriptions: "petsehat_subscriptions",
+	bookingDraft: "petsehat_booking_draft",
+	consultations: "petsehat_consultations",
 } as const;

@@ -1,23 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { PawPrint } from "lucide-react";
 
-const SHOP_LINKS = [
-	{
-		to: "/products/$category",
-		params: { category: "food" },
-		label: "Makanan & Nutrisi",
-	},
-	{
-		to: "/products/$category",
-		params: { category: "health" },
-		label: "Kesehatan & Obat",
-	},
-	{
-		to: "/products/$category",
-		params: { category: "supplies" },
-		label: "Perlengkapan",
-	},
-	{ to: "/products", params: undefined, label: "Semua Produk" },
+const CONSULT_LINKS = [
+	{ to: "/vets", label: "Cari Dokter" },
+	{ to: "/booking/intake", label: "Booking Konsultasi" },
+	{ to: "/account/consultations", label: "Jadwal Konsultasi" },
 ] as const;
 
 const ADVICE_LINKS = [
@@ -28,8 +15,8 @@ const ADVICE_LINKS = [
 
 const ACCOUNT_LINKS = [
 	{ to: "/account", label: "Akun Saya" },
-	{ to: "/account/orders", label: "Pesanan" },
-	{ to: "/account/subscriptions", label: "Langganan" },
+	{ to: "/account/consultations", label: "Konsultasi Saya" },
+	{ to: "/account/pets", label: "Profil Hewan" },
 ] as const;
 
 export function SiteFooter() {
@@ -45,19 +32,20 @@ export function SiteFooter() {
 							</span>
 						</div>
 						<p className="mt-3 max-w-sm text-sm text-muted-foreground">
-							Belanja kebutuhan hewan kesayangan dengan panduan dokter hewan
-							tepercaya. Kami bantu Anda merawat mereka dengan lebih tenang.
+							Platform telehealth hewan kesayangan. Konsultasi langsung dengan
+							dokter hewan berlisensi kapan pun hewanmu membutuhkan pertolongan.
 						</p>
 					</div>
 
 					<div>
-						<h3 className="text-sm font-semibold text-foreground">Belanja</h3>
+						<h3 className="text-sm font-semibold text-foreground">
+							Konsultasi
+						</h3>
 						<ul className="mt-3 space-y-2">
-							{SHOP_LINKS.map((link) => (
+							{CONSULT_LINKS.map((link) => (
 								<li key={link.label}>
 									<Link
 										to={link.to}
-										params={link.params}
 										className="text-sm text-muted-foreground transition-colors hover:text-foreground"
 									>
 										{link.label}
@@ -104,15 +92,14 @@ export function SiteFooter() {
 
 				<div className="mt-10 flex flex-col gap-4 border-t border-border pt-6 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between">
 					<p>
-						Pembayaran aman lewat GoPay, OVO, DANA, QRIS, dan Virtual Account.
+						Pembayaran konsultasi via GoPay, OVO, DANA, QRIS, dan Virtual
+						Account.
 					</p>
-					<p>
-						Dikirim oleh JNE, J&amp;T Express, dan SiCepat ke seluruh Indonesia.
-					</p>
+					<p>8 dokter hewan spesialis siap membantu hewanmu.</p>
 				</div>
 				<p className="mt-4 text-xs text-muted-foreground">
-					&copy; {new Date().getFullYear()} PetSehat. Toko demo untuk tujuan
-					peragaan.
+					&copy; {new Date().getFullYear()} PetSehat. Platform telehealth hewan
+					untuk tujuan peragaan.
 				</p>
 			</div>
 		</footer>

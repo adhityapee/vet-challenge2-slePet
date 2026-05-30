@@ -13,13 +13,13 @@ import { VetByline } from "@/components/advice/vet-byline";
 import { EmptyState } from "@/components/common/empty-state";
 import { PageSection } from "@/components/common/page-section";
 import { Button } from "@/components/ui/button";
-import { useCatalog } from "@/context/catalog";
+import { articles } from "@/data/articles";
+import { guides } from "@/data/guides";
 import type { ArticleTopic, PetSpecies } from "@/data/types";
 
 export const Route = createFileRoute("/advice/")({ component: AdviceHub });
 
 function AdviceHub() {
-	const { articles, guides } = useCatalog();
 	const [topic, setTopic] = useState<ArticleTopic | "all">("all");
 	const [petType, setPetType] = useState<PetSpecies | "all">("all");
 
