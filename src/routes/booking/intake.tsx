@@ -124,8 +124,11 @@ function IntakePage() {
 		setPhotos((prev) => prev.filter((_, i) => i !== idx));
 	}
 
+	// True when there are no saved profiles OR the user chose to enter a new pet manually
+	const isQuickMode = profiles.length === 0 || useQuickPet;
+
 	function validateStep0(): boolean {
-		if (useQuickPet) return quickPetName.trim().length > 0;
+		if (isQuickMode) return quickPetName.trim().length > 0;
 		return selectedProfileId !== null;
 	}
 
@@ -154,9 +157,9 @@ function IntakePage() {
 	function buildIntake(): SymptomIntake {
 		const profile = profiles.find((p) => p.id === selectedProfileId);
 		return {
-			petProfileId: useQuickPet ? null : selectedProfileId,
-			petName: useQuickPet ? quickPetName : (profile?.name ?? ""),
-			petSpecies: useQuickPet ? quickPetSpecies : (profile?.species ?? "dog"),
+			petProfileId: isQuickMode ? null : selectedProfileId,
+			petName: isQuickMode ? quickPetName : (profile?.name ?? ""),
+			petSpecies: isQuickMode ? quickPetSpecies : (profile?.species ?? "dog"),
 			concern: concern.trim(),
 			durationDays: Number(durationDays),
 			urgency,
@@ -172,10 +175,10 @@ function IntakePage() {
 	}
 
 	const selectedProfile = profiles.find((p) => p.id === selectedProfileId);
-	const petDisplayName = useQuickPet
+	const petDisplayName = isQuickMode
 		? quickPetName
 		: (selectedProfile?.name ?? "");
-	const petDisplaySpecies = useQuickPet
+	const petDisplaySpecies = isQuickMode
 		? quickPetSpecies
 		: (selectedProfile?.species ?? "dog");
 

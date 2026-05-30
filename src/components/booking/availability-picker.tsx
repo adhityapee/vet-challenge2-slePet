@@ -15,7 +15,7 @@ interface AvailabilityPickerProps {
 }
 
 export function AvailabilityPicker({ vetId }: AvailabilityPickerProps) {
-	const { selectSlot, isSlotStillAvailable } = useBooking();
+	const { setVet, selectSlot, isSlotStillAvailable } = useBooking();
 	const { consultations } = useConsultations();
 	const navigate = useNavigate();
 	const dates = useMemo(() => getDateRange(), []);
@@ -40,6 +40,7 @@ export function AvailabilityPicker({ vetId }: AvailabilityPickerProps) {
 
 	function handleContinue() {
 		if (!chosenSlot) return;
+		setVet(vetId);
 		selectSlot(chosenSlot);
 		navigate({ to: "/booking/intake" });
 	}

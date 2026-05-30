@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Award, Calendar, Globe, Languages, Star } from "lucide-react";
+import { useRef, useState } from "react";
 
 import { AvailabilityPicker } from "@/components/booking/availability-picker";
 import { EmptyState } from "@/components/common/empty-state";
@@ -60,10 +61,16 @@ function VetNotFound() {
 function VetProfilePage() {
 	const vet = Route.useLoaderData();
 	const { setVet } = useBooking();
+	const [activeTab, setActiveTab] = useState("about");
+	const tabsRef = useRef<HTMLDivElement>(null);
 
 	function handleSelectSchedule() {
 		setVet(vet.id);
+		setActiveTab("schedule");
 		track("vet_profile_view", { vetId: vet.id, slug: vet.slug });
+		setTimeout(() => {
+			tabsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+		}, 50);
 	}
 
 	return (
@@ -160,8 +167,8 @@ function VetProfilePage() {
 					</div>
 
 					{/* Right: Tabs */}
-					<div className="lg:col-span-2">
-						<Tabs defaultValue="about">
+					<div className="lg:col-span-2" ref={tabsRef}>
+						<Tabs value={activeTab} onValueChange={setActiveTab}>
 							<TabsList className="w-full mb-6">
 								<TabsTrigger value="about" className="flex-1">
 									Tentang
@@ -270,9 +277,6 @@ function VetProfilePage() {
 			<div className="fixed bottom-0 left-0 right-0 z-10 border-t border-border bg-background/95 backdrop-blur px-4 py-3 md:hidden">
 				<Button
 					className="w-full min-h-12 text-base"
-					render={
-						<Link to="/vet/$slug" params={{ slug: vet.slug }} hash="jadwal" />
-					}
 					onClick={handleSelectSchedule}
 				>
 					<Calendar className="size-4 mr-2" aria-hidden="true" />

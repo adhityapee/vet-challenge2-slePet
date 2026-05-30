@@ -127,30 +127,23 @@ export function ConsultationsProvider({ children }: { children: ReactNode }) {
 		[consultations],
 	);
 
-	const now = new Date().toISOString();
-
 	const upcoming = useMemo(
 		() =>
 			consultations.filter(
 				(c) =>
-					(c.status === "scheduled" ||
-						c.status === "waiting" ||
-						c.status === "live") &&
-					`${c.slot.date}T${c.slot.time}` >= now.slice(0, 16),
+					c.status === "scheduled" ||
+					c.status === "waiting" ||
+					c.status === "live",
 			),
-		[consultations, now],
+		[consultations],
 	);
 
 	const past = useMemo(
 		() =>
 			consultations.filter(
-				(c) =>
-					c.status === "ended" ||
-					c.status === "cancelled" ||
-					(c.status === "scheduled" &&
-						`${c.slot.date}T${c.slot.time}` < now.slice(0, 16)),
+				(c) => c.status === "ended" || c.status === "cancelled",
 			),
-		[consultations, now],
+		[consultations],
 	);
 
 	const value = useMemo<ConsultationsValue>(

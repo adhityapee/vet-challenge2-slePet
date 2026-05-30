@@ -9,6 +9,7 @@ import {
 	PhoneOff,
 	Video,
 	VideoOff,
+	Zap,
 } from "lucide-react";
 import { useMemo, useState } from "react";
 import { ConsultNotesCard } from "@/components/booking/consult-notes-card";
@@ -345,17 +346,28 @@ function ConsultDetailPage() {
 							)}
 						</div>
 
-						<div className="rounded-xl border border-dashed border-border p-4 text-center">
-							<p className="text-xs text-muted-foreground mb-2">
-								Mode demonstrasi
-							</p>
+						<div className="rounded-xl border border-amber-200 bg-amber-50 p-5 space-y-3">
+							<div className="flex items-start gap-3">
+								<Zap
+									className="size-5 text-amber-600 shrink-0 mt-0.5"
+									aria-hidden="true"
+								/>
+								<div>
+									<p className="text-sm font-semibold text-amber-900">
+										Butuh bantuan sekarang?
+									</p>
+									<p className="text-xs text-amber-700 mt-0.5 leading-relaxed">
+										Kamu tidak perlu menunggu jadwal tiba. Tekan tombol di bawah
+										untuk langsung masuk ke ruang tunggu dan berbicara dengan
+										doktermu.
+									</p>
+								</div>
+							</div>
 							<Button
-								variant="outline"
-								size="sm"
+								className="w-full min-h-11"
 								onClick={handleSimulateWaiting}
-								className="min-h-9"
 							>
-								Simulasikan waktu konsultasi
+								Mulai Konsultasi Sekarang
 							</Button>
 						</div>
 
