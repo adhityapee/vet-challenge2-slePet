@@ -57,12 +57,8 @@ export function Hero() {
 				<div className="relative animate-in fade-in zoom-in-95 duration-700">
 					<div className="overflow-hidden rounded-2xl border border-border shadow-sm">
 						<img
-							src="https://images.unsplash.com/photo-1516兔-1587797-1587876-1541779-157-1587876?auto=format&fit=crop&w=1100&q=80"
-							onError={(e) => {
-								(e.target as HTMLImageElement).src =
-									"https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1100&q=80";
-							}}
-							alt="Dokter hewan melakukan konsultasi video dengan pemilik hewan"
+							src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1100&q=80"
+							alt="Kucing dan anjing peliharaan yang sehat berdampingan"
 							className="aspect-[4/3] size-full object-cover"
 						/>
 					</div>
