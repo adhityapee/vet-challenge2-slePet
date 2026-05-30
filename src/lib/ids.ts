@@ -32,6 +32,15 @@ export function vaNumber(bankCode: string): string {
 	return digits.slice(0, 16);
 }
 
+/** Consultation number formatted CS-YYYYMMDD-XXXXX. */
+export function consultationNumber(date: Date = new Date()): string {
+	const y = date.getFullYear();
+	const m = String(date.getMonth() + 1).padStart(2, "0");
+	const d = String(date.getDate()).padStart(2, "0");
+	const suffix = String(Math.floor(10000 + Math.random() * 90000));
+	return `CS-${y}${m}${d}-${suffix}`;
+}
+
 /** Tracking number for couriers, e.g. JNE12345678. */
 export function trackingNumber(courierId: string): string {
 	const prefix =

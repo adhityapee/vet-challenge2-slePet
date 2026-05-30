@@ -213,3 +213,83 @@ export interface PromoCode {
 	value: number;
 	label: string;
 }
+
+// ─── Telehealth / Vet Consultation ───────────────────────────────────────────
+
+export type VetSpecialty =
+	| "general"
+	| "dermatology"
+	| "nutrition"
+	| "behavior"
+	| "surgery"
+	| "exotic"
+	| "dental";
+
+export type ConsultStatus =
+	| "scheduled"
+	| "waiting"
+	| "live"
+	| "ended"
+	| "cancelled";
+
+export type SlotStatus = "available" | "booked" | "blocked";
+
+export interface Vet {
+	id: string;
+	slug: string;
+	name: string; // "drh. Siti Rahmawati"
+	credential: string; // "drh., M.Sc"
+	photoUrl: string; // Unsplash portrait
+	specialties: VetSpecialty[];
+	species: PetSpecies[]; // hewan yang ditangani
+	languages: string[]; // ["Bahasa Indonesia", "English"]
+	bio: string;
+	yearsExperience: number;
+	rating: number; // 4.0 - 5.0
+	reviewCount: number;
+	consultFee: number; // integer rupiah per sesi
+	reviews: Review[];
+	nextAvailable: string; // ISO, untuk badge "tersedia hari ini"
+}
+
+export interface TimeSlot {
+	id: string; // `${vetId}-${dateISO}-${time}`
+	vetId: string;
+	date: string; // "YYYY-MM-DD"
+	time: string; // "09:00"
+	status: SlotStatus;
+}
+
+export interface SymptomIntake {
+	petProfileId: string | null; // null jika isi cepat tanpa simpan profil
+	petName: string;
+	petSpecies: PetSpecies;
+	concern: string; // keluhan utama, free text
+	durationDays: number;
+	symptomNodeId?: string; // hasil dari symptom-tree bila dipakai
+	urgency: "routine" | "soon" | "urgent";
+	photoDataUrls: string[]; // 0-3 foto (base64 di localStorage, mock)
+}
+
+export interface Consultation {
+	id: string; // "CS-YYYYMMDD-XXXXX"
+	vetId: string;
+	vetName: string;
+	vetPhotoUrl: string;
+	slot: TimeSlot;
+	intake: SymptomIntake;
+	status: ConsultStatus;
+	createdAt: string;
+	fee: number;
+	paymentMethodId: string;
+	notes?: ConsultNote; // diisi setelah konsultasi selesai
+}
+
+export interface ConsultNote {
+	summary: string;
+	diagnosis: string;
+	recommendations: string;
+	prescribedProductIds: string[]; // sambung ke produk eksisting
+	followUpInDays: number | null;
+	issuedAt: string;
+}

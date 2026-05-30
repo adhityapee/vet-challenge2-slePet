@@ -30,3 +30,28 @@ export function formatDateShort(iso: string): string {
 	const year = d.getFullYear();
 	return `${day}/${month}/${year}`;
 }
+
+const dayFormatter = new Intl.DateTimeFormat("id-ID", { weekday: "short" });
+const dayMonthFormatter = new Intl.DateTimeFormat("id-ID", {
+	day: "numeric",
+	month: "short",
+});
+
+/** "YYYY-MM-DD" -> "Sen, 23 Mei" */
+export function formatSlotDate(dateISO: string): { day: string; date: string } {
+	const d = new Date(`${dateISO}T00:00:00`);
+	return {
+		day: dayFormatter.format(d),
+		date: dayMonthFormatter.format(d),
+	};
+}
+
+/** "HH:MM" time string formatted for display */
+export function formatSlotTime(time: string): string {
+	return time;
+}
+
+/** ISO -> "23 Mei 2026, 09:00" */
+export function formatConsultDateTime(dateISO: string, time: string): string {
+	return `${formatDateID(`${dateISO}T00:00:00`)}, ${time}`;
+}

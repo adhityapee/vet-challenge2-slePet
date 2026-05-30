@@ -75,7 +75,7 @@ function Home() {
 				<CategoryGrid />
 			</PageSection>
 
-			{/* Symptom checker entry (Journey 3) */}
+			{/* Telehealth CTA (primary) */}
 			<section className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-secondary/30 to-background p-6 md:p-8">
 				<div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
 					<div className="flex items-start gap-4">
@@ -84,21 +84,51 @@ function Home() {
 						</span>
 						<div className="max-w-xl">
 							<p className="text-xs font-semibold uppercase tracking-wide text-primary">
-								Pemeriksa gejala
+								Telehealth hewan
 							</p>
 							<h2 className="mt-1 font-display text-2xl font-semibold text-foreground md:text-3xl">
-								Hewanmu terlihat kurang fit?
+								Hewanmu terlihat kurang sehat?
 							</h2>
 							<p className="mt-2 text-sm text-muted-foreground">
-								Coba pemeriksa gejala kami yang ditinjau dokter hewan. Pilih
-								jenis hewan dan keluhannya, lalu dapatkan saran langkah
-								berikutnya beserta produk yang bisa membantu.
+								Jangan tunggu sampai parah. Booking konsultasi video dengan
+								dokter hewan berlisensi sekarang dan dapatkan saran yang tepat
+								untuk hewanmu.
+							</p>
+						</div>
+					</div>
+					<Link
+						to="/vets"
+						className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50"
+					>
+						Cari Dokter
+						<ArrowRight className="size-4" aria-hidden="true" />
+					</Link>
+				</div>
+			</section>
+
+			{/* Symptom checker entry */}
+			<section className="overflow-hidden rounded-2xl border border-border bg-card p-6 md:p-8">
+				<div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+					<div className="flex items-start gap-4">
+						<span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-secondary text-primary">
+							<Stethoscope className="size-6" aria-hidden="true" />
+						</span>
+						<div className="max-w-xl">
+							<p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+								Pemeriksa gejala
+							</p>
+							<h2 className="mt-1 font-display text-xl font-semibold text-foreground md:text-2xl">
+								Belum yakin perlu ke dokter?
+							</h2>
+							<p className="mt-2 text-sm text-muted-foreground">
+								Coba pemeriksa gejala kami dan dapatkan panduan langkah
+								selanjutnya.
 							</p>
 						</div>
 					</div>
 					<Link
 						to="/advice/symptom-checker"
-						className="inline-flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-primary px-6 text-base font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-3 focus-visible:ring-ring/50"
+						className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 text-sm font-semibold text-foreground transition-colors hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50"
 					>
 						Coba pemeriksa gejala
 						<ArrowRight className="size-4" aria-hidden="true" />

@@ -41,4 +41,6 @@ export const STORAGE_KEYS = {
 	session: "petsehat_session",
 	orders: "petsehat_orders",
 	subscriptions: "petsehat_subscriptions",
+	bookingDraft: "petsehat_booking_draft",
+	consultations: "petsehat_consultations",
 } as const;

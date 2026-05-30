@@ -52,6 +52,7 @@ const SPECIES_ICON: Record<PetSpecies, LucideIcon> = {
 
 const NAV_LINKS = [
 	{ to: "/", label: "Beranda" },
+	{ to: "/vets", label: "Cari Dokter" },
 	{ to: "/products", label: "Produk" },
 	{ to: "/advice", label: "Saran Dokter" },
 ] as const;
@@ -241,6 +242,9 @@ function AccountAffordance() {
 				<DropdownMenuSeparator />
 				<DropdownMenuItem render={<Link to="/account" />}>
 					Akun saya
+				</DropdownMenuItem>
+				<DropdownMenuItem render={<Link to="/account/consultations" />}>
+					Konsultasi saya
 				</DropdownMenuItem>
 				<DropdownMenuItem render={<Link to="/account/orders" />}>
 					Pesanan

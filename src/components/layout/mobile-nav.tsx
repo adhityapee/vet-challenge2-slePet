@@ -2,10 +2,10 @@ import { Link } from "@tanstack/react-router";
 import {
 	Home,
 	type LucideIcon,
-	ShoppingBag,
 	ShoppingCart,
 	Stethoscope,
 	User as UserIcon,
+	Video,
 } from "lucide-react";
 
 import { useCart } from "@/context/cart";
@@ -19,8 +19,8 @@ interface NavItem {
 
 const ITEMS: NavItem[] = [
 	{ to: "/", label: "Beranda", icon: Home, exact: true },
-	{ to: "/products", label: "Produk", icon: ShoppingBag },
-	{ to: "/advice", label: "Saran", icon: Stethoscope },
+	{ to: "/vets", label: "Dokter", icon: Stethoscope },
+	{ to: "/account/consultations", label: "Konsultasi", icon: Video },
 	{ to: "/cart", label: "Keranjang", icon: ShoppingCart },
 	{ to: "/account", label: "Akun", icon: UserIcon },
 ];

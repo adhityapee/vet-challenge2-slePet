@@ -15,21 +15,28 @@ import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VetsIndexRouteImport } from './routes/vets/index'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as AdviceIndexRouteImport } from './routes/advice/index'
 import { Route as AccountIndexRouteImport } from './routes/account/index'
+import { Route as VetSlugRouteImport } from './routes/vet/$slug'
 import { Route as SubscribeProductIdRouteImport } from './routes/subscribe/$productId'
 import { Route as ProductsCategoryRouteImport } from './routes/products/$category'
 import { Route as ProductSlugRouteImport } from './routes/product/$slug'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout/success'
+import { Route as BookingSuccessRouteImport } from './routes/booking/success'
+import { Route as BookingIntakeRouteImport } from './routes/booking/intake'
+import { Route as BookingConfirmRouteImport } from './routes/booking/confirm'
 import { Route as AdviceSymptomCheckerRouteImport } from './routes/advice/symptom-checker'
 import { Route as AdviceAskRouteImport } from './routes/advice/ask'
 import { Route as AdviceSlugRouteImport } from './routes/advice/$slug'
 import { Route as AccountSubscriptionsRouteImport } from './routes/account/subscriptions'
 import { Route as AccountPetsRouteImport } from './routes/account/pets'
 import { Route as AccountOrdersIndexRouteImport } from './routes/account/orders/index'
+import { Route as AccountConsultationsIndexRouteImport } from './routes/account/consultations/index'
 import { Route as AdviceGuideSlugRouteImport } from './routes/advice/guide.$slug'
 import { Route as AccountOrdersOrderIdRouteImport } from './routes/account/orders/$orderId'
+import { Route as AccountConsultationsConsultIdRouteImport } from './routes/account/consultations/$consultId'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -61,6 +68,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VetsIndexRoute = VetsIndexRouteImport.update({
+  id: '/vets/',
+  path: '/vets/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
   path: '/products/',
@@ -74,6 +86,11 @@ const AdviceIndexRoute = AdviceIndexRouteImport.update({
 const AccountIndexRoute = AccountIndexRouteImport.update({
   id: '/account/',
   path: '/account/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VetSlugRoute = VetSlugRouteImport.update({
+  id: '/vet/$slug',
+  path: '/vet/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubscribeProductIdRoute = SubscribeProductIdRouteImport.update({
@@ -95,6 +112,21 @@ const CheckoutSuccessRoute = CheckoutSuccessRouteImport.update({
   id: '/success',
   path: '/success',
   getParentRoute: () => CheckoutRoute,
+} as any)
+const BookingSuccessRoute = BookingSuccessRouteImport.update({
+  id: '/booking/success',
+  path: '/booking/success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingIntakeRoute = BookingIntakeRouteImport.update({
+  id: '/booking/intake',
+  path: '/booking/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingConfirmRoute = BookingConfirmRouteImport.update({
+  id: '/booking/confirm',
+  path: '/booking/confirm',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdviceSymptomCheckerRoute = AdviceSymptomCheckerRouteImport.update({
   id: '/advice/symptom-checker',
@@ -126,6 +158,12 @@ const AccountOrdersIndexRoute = AccountOrdersIndexRouteImport.update({
   path: '/account/orders/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountConsultationsIndexRoute =
+  AccountConsultationsIndexRouteImport.update({
+    id: '/account/consultations/',
+    path: '/account/consultations/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdviceGuideSlugRoute = AdviceGuideSlugRouteImport.update({
   id: '/advice/guide/$slug',
   path: '/advice/guide/$slug',
@@ -136,6 +174,12 @@ const AccountOrdersOrderIdRoute = AccountOrdersOrderIdRouteImport.update({
   path: '/account/orders/$orderId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountConsultationsConsultIdRoute =
+  AccountConsultationsConsultIdRouteImport.update({
+    id: '/account/consultations/$consultId',
+    path: '/account/consultations/$consultId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -149,15 +193,22 @@ export interface FileRoutesByFullPath {
   '/advice/$slug': typeof AdviceSlugRoute
   '/advice/ask': typeof AdviceAskRoute
   '/advice/symptom-checker': typeof AdviceSymptomCheckerRoute
+  '/booking/confirm': typeof BookingConfirmRoute
+  '/booking/intake': typeof BookingIntakeRoute
+  '/booking/success': typeof BookingSuccessRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/product/$slug': typeof ProductSlugRoute
   '/products/$category': typeof ProductsCategoryRoute
   '/subscribe/$productId': typeof SubscribeProductIdRoute
+  '/vet/$slug': typeof VetSlugRoute
   '/account/': typeof AccountIndexRoute
   '/advice/': typeof AdviceIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/vets/': typeof VetsIndexRoute
+  '/account/consultations/$consultId': typeof AccountConsultationsConsultIdRoute
   '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/advice/guide/$slug': typeof AdviceGuideSlugRoute
+  '/account/consultations/': typeof AccountConsultationsIndexRoute
   '/account/orders/': typeof AccountOrdersIndexRoute
 }
 export interface FileRoutesByTo {
@@ -172,15 +223,22 @@ export interface FileRoutesByTo {
   '/advice/$slug': typeof AdviceSlugRoute
   '/advice/ask': typeof AdviceAskRoute
   '/advice/symptom-checker': typeof AdviceSymptomCheckerRoute
+  '/booking/confirm': typeof BookingConfirmRoute
+  '/booking/intake': typeof BookingIntakeRoute
+  '/booking/success': typeof BookingSuccessRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/product/$slug': typeof ProductSlugRoute
   '/products/$category': typeof ProductsCategoryRoute
   '/subscribe/$productId': typeof SubscribeProductIdRoute
+  '/vet/$slug': typeof VetSlugRoute
   '/account': typeof AccountIndexRoute
   '/advice': typeof AdviceIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/vets': typeof VetsIndexRoute
+  '/account/consultations/$consultId': typeof AccountConsultationsConsultIdRoute
   '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/advice/guide/$slug': typeof AdviceGuideSlugRoute
+  '/account/consultations': typeof AccountConsultationsIndexRoute
   '/account/orders': typeof AccountOrdersIndexRoute
 }
 export interface FileRoutesById {
@@ -196,15 +254,22 @@ export interface FileRoutesById {
   '/advice/$slug': typeof AdviceSlugRoute
   '/advice/ask': typeof AdviceAskRoute
   '/advice/symptom-checker': typeof AdviceSymptomCheckerRoute
+  '/booking/confirm': typeof BookingConfirmRoute
+  '/booking/intake': typeof BookingIntakeRoute
+  '/booking/success': typeof BookingSuccessRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/product/$slug': typeof ProductSlugRoute
   '/products/$category': typeof ProductsCategoryRoute
   '/subscribe/$productId': typeof SubscribeProductIdRoute
+  '/vet/$slug': typeof VetSlugRoute
   '/account/': typeof AccountIndexRoute
   '/advice/': typeof AdviceIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/vets/': typeof VetsIndexRoute
+  '/account/consultations/$consultId': typeof AccountConsultationsConsultIdRoute
   '/account/orders/$orderId': typeof AccountOrdersOrderIdRoute
   '/advice/guide/$slug': typeof AdviceGuideSlugRoute
+  '/account/consultations/': typeof AccountConsultationsIndexRoute
   '/account/orders/': typeof AccountOrdersIndexRoute
 }
 export interface FileRouteTypes {
@@ -221,15 +286,22 @@ export interface FileRouteTypes {
     | '/advice/$slug'
     | '/advice/ask'
     | '/advice/symptom-checker'
+    | '/booking/confirm'
+    | '/booking/intake'
+    | '/booking/success'
     | '/checkout/success'
     | '/product/$slug'
     | '/products/$category'
     | '/subscribe/$productId'
+    | '/vet/$slug'
     | '/account/'
     | '/advice/'
     | '/products/'
+    | '/vets/'
+    | '/account/consultations/$consultId'
     | '/account/orders/$orderId'
     | '/advice/guide/$slug'
+    | '/account/consultations/'
     | '/account/orders/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -244,15 +316,22 @@ export interface FileRouteTypes {
     | '/advice/$slug'
     | '/advice/ask'
     | '/advice/symptom-checker'
+    | '/booking/confirm'
+    | '/booking/intake'
+    | '/booking/success'
     | '/checkout/success'
     | '/product/$slug'
     | '/products/$category'
     | '/subscribe/$productId'
+    | '/vet/$slug'
     | '/account'
     | '/advice'
     | '/products'
+    | '/vets'
+    | '/account/consultations/$consultId'
     | '/account/orders/$orderId'
     | '/advice/guide/$slug'
+    | '/account/consultations'
     | '/account/orders'
   id:
     | '__root__'
@@ -267,15 +346,22 @@ export interface FileRouteTypes {
     | '/advice/$slug'
     | '/advice/ask'
     | '/advice/symptom-checker'
+    | '/booking/confirm'
+    | '/booking/intake'
+    | '/booking/success'
     | '/checkout/success'
     | '/product/$slug'
     | '/products/$category'
     | '/subscribe/$productId'
+    | '/vet/$slug'
     | '/account/'
     | '/advice/'
     | '/products/'
+    | '/vets/'
+    | '/account/consultations/$consultId'
     | '/account/orders/$orderId'
     | '/advice/guide/$slug'
+    | '/account/consultations/'
     | '/account/orders/'
   fileRoutesById: FileRoutesById
 }
@@ -291,14 +377,21 @@ export interface RootRouteChildren {
   AdviceSlugRoute: typeof AdviceSlugRoute
   AdviceAskRoute: typeof AdviceAskRoute
   AdviceSymptomCheckerRoute: typeof AdviceSymptomCheckerRoute
+  BookingConfirmRoute: typeof BookingConfirmRoute
+  BookingIntakeRoute: typeof BookingIntakeRoute
+  BookingSuccessRoute: typeof BookingSuccessRoute
   ProductSlugRoute: typeof ProductSlugRoute
   ProductsCategoryRoute: typeof ProductsCategoryRoute
   SubscribeProductIdRoute: typeof SubscribeProductIdRoute
+  VetSlugRoute: typeof VetSlugRoute
   AccountIndexRoute: typeof AccountIndexRoute
   AdviceIndexRoute: typeof AdviceIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
+  VetsIndexRoute: typeof VetsIndexRoute
+  AccountConsultationsConsultIdRoute: typeof AccountConsultationsConsultIdRoute
   AccountOrdersOrderIdRoute: typeof AccountOrdersOrderIdRoute
   AdviceGuideSlugRoute: typeof AdviceGuideSlugRoute
+  AccountConsultationsIndexRoute: typeof AccountConsultationsIndexRoute
   AccountOrdersIndexRoute: typeof AccountOrdersIndexRoute
 }
 
@@ -346,6 +439,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vets/': {
+      id: '/vets/'
+      path: '/vets'
+      fullPath: '/vets/'
+      preLoaderRoute: typeof VetsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/products/': {
       id: '/products/'
       path: '/products'
@@ -365,6 +465,13 @@ declare module '@tanstack/react-router' {
       path: '/account'
       fullPath: '/account/'
       preLoaderRoute: typeof AccountIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/vet/$slug': {
+      id: '/vet/$slug'
+      path: '/vet/$slug'
+      fullPath: '/vet/$slug'
+      preLoaderRoute: typeof VetSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/subscribe/$productId': {
@@ -394,6 +501,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/checkout/success'
       preLoaderRoute: typeof CheckoutSuccessRouteImport
       parentRoute: typeof CheckoutRoute
+    }
+    '/booking/success': {
+      id: '/booking/success'
+      path: '/booking/success'
+      fullPath: '/booking/success'
+      preLoaderRoute: typeof BookingSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/intake': {
+      id: '/booking/intake'
+      path: '/booking/intake'
+      fullPath: '/booking/intake'
+      preLoaderRoute: typeof BookingIntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/confirm': {
+      id: '/booking/confirm'
+      path: '/booking/confirm'
+      fullPath: '/booking/confirm'
+      preLoaderRoute: typeof BookingConfirmRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/advice/symptom-checker': {
       id: '/advice/symptom-checker'
@@ -437,6 +565,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccountOrdersIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account/consultations/': {
+      id: '/account/consultations/'
+      path: '/account/consultations'
+      fullPath: '/account/consultations/'
+      preLoaderRoute: typeof AccountConsultationsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/advice/guide/$slug': {
       id: '/advice/guide/$slug'
       path: '/advice/guide/$slug'
@@ -449,6 +584,13 @@ declare module '@tanstack/react-router' {
       path: '/account/orders/$orderId'
       fullPath: '/account/orders/$orderId'
       preLoaderRoute: typeof AccountOrdersOrderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account/consultations/$consultId': {
+      id: '/account/consultations/$consultId'
+      path: '/account/consultations/$consultId'
+      fullPath: '/account/consultations/$consultId'
+      preLoaderRoute: typeof AccountConsultationsConsultIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -478,14 +620,21 @@ const rootRouteChildren: RootRouteChildren = {
   AdviceSlugRoute: AdviceSlugRoute,
   AdviceAskRoute: AdviceAskRoute,
   AdviceSymptomCheckerRoute: AdviceSymptomCheckerRoute,
+  BookingConfirmRoute: BookingConfirmRoute,
+  BookingIntakeRoute: BookingIntakeRoute,
+  BookingSuccessRoute: BookingSuccessRoute,
   ProductSlugRoute: ProductSlugRoute,
   ProductsCategoryRoute: ProductsCategoryRoute,
   SubscribeProductIdRoute: SubscribeProductIdRoute,
+  VetSlugRoute: VetSlugRoute,
   AccountIndexRoute: AccountIndexRoute,
   AdviceIndexRoute: AdviceIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
+  VetsIndexRoute: VetsIndexRoute,
+  AccountConsultationsConsultIdRoute: AccountConsultationsConsultIdRoute,
   AccountOrdersOrderIdRoute: AccountOrdersOrderIdRoute,
   AdviceGuideSlugRoute: AdviceGuideSlugRoute,
+  AccountConsultationsIndexRoute: AccountConsultationsIndexRoute,
   AccountOrdersIndexRoute: AccountOrdersIndexRoute,
 }
 export const routeTree = rootRouteImport
