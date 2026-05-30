@@ -56,7 +56,7 @@ function ConsultationsListPage() {
 									<img
 										src={c.vetPhotoUrl}
 										alt={c.vetName}
-										className="size-11 rounded-full object-cover object-top shrink-0"
+										className="size-11 rounded-full object-cover object-center shrink-0"
 									/>
 									<div className="flex-1 min-w-0">
 										<p className="font-medium text-foreground truncate">
@@ -101,7 +101,7 @@ function ConsultationsListPage() {
 									<img
 										src={c.vetPhotoUrl}
 										alt={c.vetName}
-										className="size-11 rounded-full object-cover object-top shrink-0 grayscale"
+										className="size-11 rounded-full object-cover object-center shrink-0 grayscale"
 									/>
 									<div className="flex-1 min-w-0">
 										<p className="font-medium text-foreground truncate">

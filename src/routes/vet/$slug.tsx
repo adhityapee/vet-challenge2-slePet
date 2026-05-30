@@ -102,7 +102,7 @@ function VetProfilePage() {
 								<img
 									src={vet.photoUrl}
 									alt={`Foto ${vet.name}`}
-									className="h-64 w-full object-cover object-top"
+									className="h-64 w-full object-cover object-center"
 								/>
 								<div className="p-5 space-y-4">
 									<div>

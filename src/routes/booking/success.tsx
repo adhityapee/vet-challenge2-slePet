@@ -106,14 +106,9 @@ function BookingSuccessPage() {
 				<div className="flex flex-col gap-3">
 					<Button
 						className="w-full min-h-12"
-						render={
-							<Link
-								to="/account/consultations/$consultId"
-								params={{ consultId: consultation.id }}
-							/>
-						}
+						render={<Link to="/account/consultations" />}
 					>
-						Lihat Detail Konsultasi
+						Konsultasi Saya
 					</Button>
 					<Button
 						variant="outline"

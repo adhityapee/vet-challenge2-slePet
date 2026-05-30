@@ -273,7 +273,7 @@ function ConsultDetailPage() {
 							src={consultation.vetPhotoUrl}
 							alt={consultation.vetName}
 							className={cn(
-								"size-14 rounded-full object-cover object-top shrink-0",
+								"size-14 rounded-full object-cover object-center shrink-0",
 								isCancelled && "grayscale opacity-60",
 							)}
 						/>

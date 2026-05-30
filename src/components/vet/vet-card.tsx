@@ -37,7 +37,7 @@ export function VetCard({ vet, className }: VetCardProps) {
 				<img
 					src={vet.photoUrl}
 					alt={`Foto ${vet.name}`}
-					className="h-48 w-full object-cover object-top"
+					className="h-48 w-full object-cover object-center"
 					loading="lazy"
 				/>
 				{availableToday && (

@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Calendar, ChevronRight, User } from "lucide-react";
+import { Calendar, ChevronRight, User, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { PaymentMethodSelect } from "@/components/booking/payment-method-select";
@@ -31,17 +31,20 @@ function ConfirmPage() {
 	const { vetId, selectedSlot, intake, clearDraft } = useBooking();
 	const { book } = useConsultations();
 
-	useEffect(() => {
-		if (!vetId || !selectedSlot || !intake) {
-			navigate({ to: "/vets" });
-		}
-	}, [vetId, selectedSlot, intake, navigate]);
-
-	const vet = vetId ? getVetById(vetId) : null;
-
 	const [paymentId, setPaymentId] = useState<PaymentMethodId | null>(null);
 	const [vaBank, setVaBank] = useState<string | null>(null);
 	const [isBooking, setIsBooking] = useState(false);
+
+	// Guard: redirect only when NOT in the middle of booking, so clearDraft()
+	// doesn't trigger this before navigation commits.
+	useEffect(() => {
+		if (isBooking) return;
+		if (!vetId || !selectedSlot || !intake) {
+			navigate({ to: "/vets" });
+		}
+	}, [vetId, selectedSlot, intake, navigate, isBooking]);
+
+	const vet = vetId ? getVetById(vetId) : null;
 	const [paymentError, setPaymentError] = useState<string | null>(null);
 
 	async function handleConfirm() {
@@ -58,8 +61,20 @@ function ConfirmPage() {
 		track("book_consultation", {
 			consultId: consultation.id,
 			paymentMethod: paymentId,
+			urgency: intake.urgency,
 		});
-		navigate({ to: "/booking/success", search: { consult: consultation.id } });
+
+		if (intake.urgency === "urgent") {
+			navigate({
+				to: "/account/consultations/$consultId",
+				params: { consultId: consultation.id },
+			});
+		} else {
+			navigate({
+				to: "/booking/success",
+				search: { consult: consultation.id },
+			});
+		}
 	}
 
 	if (!vetId || !selectedSlot || !intake || !vet) return null;
@@ -176,6 +191,20 @@ function ConfirmPage() {
 						<span className="text-primary">{formatIDR(vet.consultFee)}</span>
 					</div>
 				</div>
+
+				{intake.urgency === "urgent" && (
+					<div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 mb-4 flex items-start gap-2.5">
+						<Zap
+							className="size-4 text-amber-600 shrink-0 mt-0.5"
+							aria-hidden="true"
+						/>
+						<p className="text-sm text-amber-800">
+							Kamu memilih konsultasi <strong>segera</strong>. Setelah
+							pembayaran dikonfirmasi, kamu akan langsung masuk ke halaman
+							konsultasi dan bisa mulai berbicara dengan dokter.
+						</p>
+					</div>
+				)}
 
 				<Button
 					className="w-full min-h-12 text-base"

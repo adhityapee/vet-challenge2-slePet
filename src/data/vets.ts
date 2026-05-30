@@ -75,7 +75,7 @@ function buildVetReviews(
 }
 
 function portrait(unsplashId: string): string {
-	return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&w=400&q=80`;
+	return `https://images.unsplash.com/photo-${unsplashId}?auto=format&fit=crop&crop=faces&w=400&h=400&q=80`;
 }
 
 function todayPlus(days: number): string {
@@ -91,7 +91,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "siti-rahmawati",
 		name: "drh. Siti Rahmawati",
 		credential: "drh., M.Sc",
-		photoUrl: portrait("1494790108377-be9c29b29330"),
+		photoUrl: portrait("1594824476967-48c8b964273f"),
 		specialties: ["general", "nutrition"],
 		species: ["dog", "cat", "rabbit"],
 		languages: ["Bahasa Indonesia", "English"],
@@ -123,7 +123,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "anisa-pertiwi",
 		name: "drh. Anisa Pertiwi",
 		credential: "drh., M.Vet",
-		photoUrl: portrait("1594744803329-e58b31de8bf5"),
+		photoUrl: portrait("1659353888906-adb3e0041693"),
 		specialties: ["dermatology", "general"],
 		species: ["dog", "cat", "rabbit"],
 		languages: ["Bahasa Indonesia", "English"],
@@ -139,7 +139,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "rahmat-hidayat",
 		name: "drh. Rahmat Hidayat",
 		credential: "drh.",
-		photoUrl: portrait("1507003211169-0a1dd7228f2d"),
+		photoUrl: portrait("1622253692010-333f2da6031d"),
 		specialties: ["behavior", "general"],
 		species: ["dog", "cat", "bird", "rabbit"],
 		languages: ["Bahasa Indonesia"],
@@ -155,7 +155,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "maya-kusuma",
 		name: "drh. Maya Kusuma",
 		credential: "drh., Ph.D",
-		photoUrl: portrait("1573496359142-b8d87734a5a2"),
+		photoUrl: portrait("1673865641073-4479f93a7776"),
 		specialties: ["exotic", "general"],
 		species: ["bird", "rabbit", "fish", "other"],
 		languages: ["Bahasa Indonesia", "English", "Mandarin"],
@@ -171,7 +171,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "dian-pramesti",
 		name: "drh. Dian Pramesti",
 		credential: "drh., M.Sc",
-		photoUrl: portrait("1580489944761-15a19d654956"),
+		photoUrl: portrait("1670191247079-f9713ae06dcf"),
 		specialties: ["dental", "general"],
 		species: ["dog", "cat"],
 		languages: ["Bahasa Indonesia", "English"],
@@ -187,7 +187,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "fariz-abdurrahman",
 		name: "drh. Fariz Abdurrahman",
 		credential: "drh., M.Vet",
-		photoUrl: portrait("1472099645785-5658abf4ff4e"),
+		photoUrl: portrait("1637059824899-a441006a6875"),
 		specialties: ["general", "nutrition", "behavior"],
 		species: ["dog", "cat", "rabbit", "fish"],
 		languages: ["Bahasa Indonesia"],
@@ -203,7 +203,7 @@ const vetSeeds: Omit<Vet, "reviews">[] = [
 		slug: "linda-oktavia",
 		name: "drh. Linda Oktavia",
 		credential: "drh., Sp.KH",
-		photoUrl: portrait("1534528741775-53994a69daeb"),
+		photoUrl: portrait("1643297654416-05795d62e39c"),
 		specialties: ["general", "dermatology", "nutrition"],
 		species: ["dog", "cat", "rabbit"],
 		languages: ["Bahasa Indonesia", "English"],
